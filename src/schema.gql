@@ -1,0 +1,2041 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type DepartmentLevel {
+  id: Int!
+  order: Float!
+  name: String!
+  planTargetFlag: Boolean!
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+scalar Date
+
+type AccessControl {
+  id: Int!
+  identityType: String
+  planAccessType: String
+  planMeasureAccessType: String
+  planApprovalAccessType: String
+  planFormulationRequestFlag: Boolean
+  planMeasureRegistrationRequestFlag: Boolean
+  planMeasureConfirmFlag: Boolean
+  targetDepartmentLevel: DepartmentLevel
+  position: Position!
+  userDepartment: UserDepartment
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type Position {
+  id: Int!
+  name: String!
+  weight: Float!
+  accessControl: [AccessControl!]!
+  userDepartments: UserDepartment
+  enabledAt: String
+  disabledAt: String
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type ApprovalEmailTemplate {
+  id: Int!
+  requestMessage: String!
+  requestMessageSubject: String!
+  approvalNextMessage: String!
+  approvalNextMessageSubject: String!
+  approvalRequesterMessage: String!
+  approvalRequesterMessageSubject: String!
+  rejectMessage: String!
+  rejectMessageSubject: String!
+  cancelMessage: String!
+  cancelMessageSubject: String!
+  approvalCategory: ApprovalCategory
+  version: Float!
+  createdUserId: Float
+  updatedUserId: Float
+  createdAt: Date!
+  updatedAt: Date!
+  deletedUserId: Float
+}
+
+type ApprovalRequestMessageTemplate {
+  id: Int!
+  message: String!
+  approvalCategory: ApprovalCategory
+  version: Float!
+  createdUserId: Float
+  updatedUserId: Float
+  createdAt: Date!
+  updatedAt: Date!
+  deletedUserId: Float
+}
+
+type ApprovalCategory {
+  id: Int!
+  slug: String!
+  name: String!
+  approvalRequests: [ApprovalRequest]
+  approvalEmailTemplate: ApprovalEmailTemplate
+  approvalRequestMessageTemplate: ApprovalRequestMessageTemplate
+  version: Float!
+  createdUserId: Float
+  updatedUserId: Float
+  createdAt: Date!
+  updatedAt: Date!
+  deletedUserId: Float
+}
+
+type Target {
+  id: Int!
+  measures: [Measure]
+  taskId: Int
+  text: String!
+  version: Float!
+  createdUserId: Float
+  updatedUserId: Float
+  deletedUserId: Float
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+type Todo {
+  id: Int!
+  measures: [Measure]
+  taskId: Int
+  text: String!
+  version: Float!
+  createdUserId: Float
+  updatedUserId: Float
+  createdAt: Date!
+  updatedAt: Date!
+  deletedUserId: Float
+}
+
+type StudyContent {
+  id: Int!
+  measures: [Measure]
+  taskId: Int
+  text: String!
+  version: Float!
+  createdUserId: Float
+  updatedUserId: Float
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+type Other {
+  id: Int!
+  measures: [Measure]
+  taskId: Int
+  text: String!
+  version: Float!
+  createdUserId: Float
+  updatedUserId: Float
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+type System {
+  id: Int!
+  measureImplementationTasks: [MeasureImplementationTask!]
+  name: String!
+  version: Float!
+  createdUserId: Float
+  updatedUserId: Float
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+type ItAssetType {
+  id: Int!
+  purchasePlans: [MeasureImplementationTask!]
+  abandonmentPlans: [MeasureImplementationTask!]
+  code: String!
+  displayOrder: Float!
+  version: Float!
+  createdUserId: Float
+  updatedUserId: Float
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+type MeasureImplementationTask {
+  id: Int!
+  ganttId: String
+  type: String
+  measureId: Int
+  name: String!
+  overview: String
+  newSystemName: String
+  systemOverview: String
+  affectedSystems: [System!]
+  targetSystem: System
+  modificationDescription: String
+  purchaseTargets: [ItAssetType!]
+  abandonmentTargets: [ItAssetType!]
+  implementationDetail: String
+  investigationDescription: String
+  procurementDescription: String
+  procurementScope: String
+  implementTarget: String
+  participants: JSON
+  scopes: JSON
+  participantScopeRoles: JSON
+  startAt: Date
+  endAt: Date
+  version: Float!
+  createdUserId: Float
+  updatedUserId: Float
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+
+type MeasureImplementationEffect {
+  id: Int!
+  measureId: Int
+  evaluation: String!
+  valueBeforeImprovement: String
+  valueAfterImprovement: String
+  calculationBasis: String
+  startAt: Date
+  startAtMemo: String
+  measuringMethod: String
+  annualCostEffect: Float
+  version: Float!
+  createdUserId: Float
+  updatedUserId: Float
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+type Investigation {
+  id: Int!
+  measures: [Measure]
+  taskId: Int
+  text: String!
+  version: Float!
+  createdUserId: Float
+  updatedUserId: Float
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+type Measure {
+  id: Int!
+  approvalRequests: [ApprovalRequest]
+  measureImplementationTasks: [MeasureImplementationTask]
+  measureImplementationEffects: [MeasureImplementationEffect]
+  causeConditions: [CauseCondition]
+  causes: [Cause]
+  targets: [Target]
+  todos: [Todo]
+  studyContents: [StudyContent]
+  investigations: [Investigation]
+  others: [Other]
+  code: String
+  name: String!
+  overview: String
+  prerequisites: String
+  effectMethod: String
+  implementationMethod: String
+  usedTechnology: String
+  systemLinking: String
+  specification: String
+  purchaseAmount: String
+  implementationDetail: String
+  startDate: String
+  endDate: String
+  isAdopted: String
+  links: JSON
+  costUnit: String
+  version: Float
+  createdAt: Date
+  createdUserId: Float
+  updatedAt: Date
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type CauseCondition {
+  id: Int!
+  causeId: Int
+  achievementCondition: String!
+  version: Float!
+  createdUserId: Float
+  updatedUserId: Float
+  createdAt: Date
+  updatedAt: Date
+  deletedUserId: Float
+}
+
+type Cause {
+  id: Int!
+  measures: [Measure]
+  issueId: Int
+  causeConditions: [CauseCondition!]
+  text: String!
+  isHypothesis: Boolean!
+  version: Float!
+  createdUserId: Float
+  updatedUserId: Float
+  createdAt: Date
+  updatedAt: Date
+  deletedUserId: Float
+}
+
+type Issue {
+  id: Int!
+  taskId: Int
+  task: Task
+  causes: [Cause!]
+  occurStatus: String!
+  occurCount: Float!
+  occurFrequency: String!
+  occurFrequencyDetail: String
+  contents: String!
+  impact: String!
+  version: Float!
+  createdUserId: Float
+  updatedUserId: Float
+  createdAt: Date!
+  updatedAt: Date!
+  deletedUserId: Float
+}
+
+type Task {
+  id: Int!
+  code: String!
+  name: String
+  registeredAt: Date!
+  registered_user_id: Float
+  registeredUser: User
+  approvalRequests: [ApprovalRequest]
+  taskType: Float
+  issue: Issue
+  targets: [Target]
+  todos: [Todo]
+  studyContents: [StudyContent]
+  investigations: [Investigation]
+  others: [Other]
+  taskStatus: String
+  startDate: String
+  endDate: String
+  project_id: Float
+  version: Float!
+  createdUserId: Float
+  updatedUserId: Float
+  createdAt: Date!
+  updatedAt: Date!
+  deletedUserId: Float
+}
+
+type ApprovalRequest {
+  id: Int!
+  code: String!
+  status: String!
+  approvalCategory: ApprovalCategory
+  requestedBy: UserDepartment
+  message: String
+  until: String
+  project: Project
+  task: Task
+  measure: Measure
+  approvalFlow: ApprovalFlow
+  version: Float!
+  createdUserId: Float
+  updatedUserId: Float
+  createdAt: Date!
+  updatedAt: Date!
+  deletedUserId: Float
+}
+
+type ApprovalFlow {
+  id: Int!
+  name: String
+  description: String
+  approvalRequests: [ApprovalRequest!]
+  approvalSteps: [ApprovalStep]
+  version: Float!
+  createdUserId: Float
+  updatedUserId: Float
+  createdAt: Date!
+  updatedAt: Date!
+  deletedUserId: Float
+}
+
+type ApprovalStepPosition {
+  id: Int!
+  approvalStep: ApprovalStep
+  position: Position!
+  version: Float!
+  createdUserId: Float
+  updatedUserId: Float
+  createdAt: Date!
+  updatedAt: Date!
+  deletedUserId: Float
+}
+
+type ApprovalStepOrganization {
+  id: Int!
+  approvalStep: ApprovalStep
+  department: Department!
+  version: Float!
+  createdUserId: Float
+  updatedUserId: Float
+  createdAt: Date!
+  updatedAt: Date!
+  deletedUserId: Float
+}
+
+type ApprovalStep {
+  id: Int!
+  name: String
+  order: Float
+  type: String!
+  isEditableFlow: Boolean
+  isSkippableFlow: Boolean
+  approverType: String!
+  isRequesterIncluded: Boolean
+  approvalFlow: ApprovalFlow
+  approvalStepPositions: [ApprovalStepPosition]
+  approvalStepOrganizations: [ApprovalStepOrganization]
+  approvalStepAssignees: [ApprovalStepAssignee]
+  department: Department
+  version: Float!
+  createdUserId: Float
+  updatedUserId: Float
+  createdAt: Date!
+  updatedAt: Date!
+  deletedUserId: Float
+}
+
+type ApprovalStepAssignee {
+  id: Int!
+  comment: String
+  userDepartment: UserDepartment
+  approvalStep: ApprovalStep
+  approvalStatus: String!
+  statusChangedAt: Date
+  version: Float!
+  createdUserId: Float
+  updatedUserId: Float
+  createdAt: Date!
+  updatedAt: Date!
+  deletedUserId: Float
+}
+
+type NotificationTemplate {
+  id: Int!
+  body: String
+  link: String
+  type: String!
+  version: Float!
+  createdUserId: Float
+  updatedUserId: Float
+  createdAt: Date!
+  updatedAt: Date!
+  deletedUserId: Float
+}
+
+type Notification {
+  id: Int!
+  notifyDate: Date
+  notifyTo: UserDepartment
+  raisedBy: UserDepartment
+  template: NotificationTemplate
+  message: String
+  isSeen: Boolean
+  link: String
+  version: Float!
+  createdUserId: Float
+  updatedUserId: Float
+  createdAt: Date!
+  updatedAt: Date!
+  deletedUserId: Float
+}
+
+type PlanMeasureRegistrationRequest {
+  id: Int!
+  code: String!
+  plan: Plan
+  planMeasure: PlanMeasure
+  requestedBy: UserDepartment
+  until: String
+  requestedTo: [UserDepartment]
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type Plan {
+  id: Int!
+  planMeasures: [PlanMeasure]
+  planMeasureRegistrationRequests: [PlanMeasureRegistrationRequest]
+  department: Department
+  status: String!
+  targetSales: Float!
+  deemedSales: Float!
+  targetSalesCost: Float!
+  targetSellingExpense: Float!
+  targetSellingExpenseOfOwnDepartment: Float!
+  targetGeneralAdministrativeExpense: Float!
+  annualPlan: AnnualPlan
+  version: Float!
+  createdUserId: Float
+  updatedUserId: Float
+  createdAt: Date!
+  updatedAt: Date!
+  deletedUserId: Float
+}
+
+type ApprovedAnnualPlanSnapshot {
+  id: Int!
+  annualPlan: AnnualPlan
+  plans: [Plan!]!
+  client: Client
+  version: Float!
+  createdUserId: Float
+  updatedUserId: Float
+  createdAt: Date!
+  updatedAt: Date!
+  deletedUserId: Float
+}
+
+type AnnualPlan {
+  id: Int!
+  businessYear: BusinessYear
+  snapshots: [ApprovedAnnualPlanSnapshot!]
+  status: String!
+  department: Department
+  plans: [Plan]
+  client: Client
+  version: Float!
+  createdUserId: Float
+  updatedUserId: Float
+  createdAt: Date!
+  updatedAt: Date!
+  deletedUserId: Float
+}
+
+type BusinessYear {
+  id: Int!
+  annualPlans: [AnnualPlan]
+  planMeasures: [PlanMeasure]
+  name: String!
+  year: Float!
+  startYear: Float!
+  startMonth: Float!
+  startDate: Float!
+  endYear: Float!
+  endMonth: Float!
+  endDate: Float!
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type PlanMeasureRiskPrice {
+  id: Int!
+  businessYear: BusinessYear
+  department: Department
+  risk: PlanMeasureRisk
+  yearOfOccurrence: Float!
+  monthOfOccurrence: Float!
+  cost: Float
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type PlanMeasureRiskCostTargetDepartment {
+  id: Int!
+  businessYear: BusinessYear
+  department: Department
+  measure: PlanMeasure!
+  risk: PlanMeasureRisk!
+  assign: PlanMeasureRiskAssign!
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type PlanMeasureRiskCostTargetIndividual {
+  id: Int!
+  businessYear: BusinessYear
+  department: Department
+  measure: PlanMeasure!
+  risk: PlanMeasureRisk!
+  assign: PlanMeasureRiskAssign!
+  userDpm: UserDepartment
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type PlanMeasureRiskAssign {
+  id: Int!
+  businessYear: BusinessYear!
+  department: Department!
+  risk: PlanMeasureRisk
+  costTD: PlanMeasureRiskCostTargetDepartment
+  costTI: PlanMeasureRiskCostTargetIndividual
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type AccountDisplayTitle {
+  id: Int!
+  name: String!
+  type: String!
+  accountTitles: [AccountTitle!]!
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type AccountTitle {
+  id: Int!
+  name: String!
+  type: String
+  accountDisplayTitle: AccountDisplayTitle!
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type PlanMeasureRisk {
+  id: Int!
+  planMeasure: PlanMeasure
+  businessYear: BusinessYear!
+  department: Department!
+  prices: [PlanMeasureRiskPrice]
+  riskName: String!
+  accountTitle: AccountTitle
+  targetType: String
+  assigns: [PlanMeasureRiskAssign]
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type PlanMeasureEffectSalePrice {
+  id: Int!
+  businessYear: BusinessYear
+  department: Department
+  planMeasureEffectSale: PlanMeasureEffectSale!
+  yearOfOccurrence: Float!
+  monthOfOccurrence: Float!
+  cost: Float
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type PlanMeasureEffectSale {
+  id: Int!
+  planMeasure: PlanMeasure
+  businessYear: BusinessYear
+  department: Department
+  prices: [PlanMeasureEffectSalePrice]
+  project: String
+  effectIncDec: String
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type PlanMeasureCostPrice {
+  id: Int!
+  businessYear: BusinessYear!
+  department: Department!
+  planMeasureCost: PlanMeasureCost!
+  yearOfOccurrence: Float!
+  monthOfOccurrence: Float!
+  cost: Float
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type PlanMeasureCostTargetIndividual {
+  id: Int!
+  businessYear: BusinessYear
+  department: Department
+  measure: PlanMeasure!
+  cost: PlanMeasureCost!
+  assign: PlanMeasureCostAssign!
+  userDpm: UserDepartment
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  deletedUserId: Float
+}
+
+type PlanMeasureCostTargetDepartment {
+  id: Int!
+  businessYear: BusinessYear
+  department: Department
+  measure: PlanMeasure!
+  cost: PlanMeasureCost!
+  assign: PlanMeasureCostAssign!
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  deletedUserId: Float
+}
+
+type PlanMeasureCostAssign {
+  id: Int!
+  businessYear: BusinessYear
+  department: Department
+  cost: PlanMeasureCost!
+  costTD: PlanMeasureCostTargetDepartment
+  costTI: PlanMeasureCostTargetIndividual
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type PlanMeasureCost {
+  id: Int!
+  planMeasure: PlanMeasure
+  businessYear: BusinessYear!
+  department: Department!
+  prices: [PlanMeasureCostPrice]
+  costName: String
+  item: String
+  effectIncDec: String
+  accountTitle: AccountTitle
+  assigns: [PlanMeasureCostAssign!]
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type PlanMeasureTaskPrice {
+  id: Int!
+  businessYear: BusinessYear
+  department: Department
+  task: PlanMeasureTask
+  yearOfOccurrence: Float!
+  monthOfOccurrence: Float!
+  cost: Float
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type PlanMeasureTaskCostTargetDepartment {
+  id: Int!
+  businessYear: BusinessYear
+  department: Department
+  measure: PlanMeasure!
+  task: PlanMeasureTask!
+  assign: PlanMeasureTaskAssign!
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type PlanMeasureTaskCostTargetIndividual {
+  id: Int!
+  businessYear: BusinessYear
+  department: Department
+  measure: PlanMeasure!
+  task: PlanMeasureTask!
+  assign: PlanMeasureTaskAssign!
+  userDpm: UserDepartment!
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type PlanMeasureTaskAssign {
+  id: Int!
+  businessYear: BusinessYear!
+  department: Department!
+  task: PlanMeasureTask!
+  costTD: PlanMeasureTaskCostTargetDepartment
+  costTI: PlanMeasureTaskCostTargetIndividual
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type PlanMeasureTaskAllocation {
+  id: Int!
+  businessYear: BusinessYear!
+  department: Department!
+  task: PlanMeasureTask!
+  distriDpm: Department!
+  allocationRate: Float
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type PlanMeasureTask {
+  id: Int!
+  planMeasure: PlanMeasure
+  businessYear: BusinessYear
+  department: Department
+  prices: [PlanMeasureTaskPrice]
+  allocations: [PlanMeasureTaskAllocation]
+  assigns: [PlanMeasureTaskAssign]
+  taskName: String!
+  accountTitle: AccountTitle
+  costRecordingDestination: String
+  kpiType: String
+  kpiOther: String
+  kpiThreshold: String
+  kpiPeriod: String
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type PlanMeasure {
+  id: Int!
+  code: String!
+  risks: [PlanMeasureRisk]
+  sales: [PlanMeasureEffectSale]
+  costs: [PlanMeasureCost]
+  tasks: [PlanMeasureTask]
+  plans: [Plan]
+  businessYear: BusinessYear
+  department: Department
+  measureName: String!
+  overview: String
+  classification: String
+  implementationTarget: String
+  registeredBy: UserDepartment
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type UserDepartment {
+  id: Int!
+  user: User!
+  department: Department!
+  position: Position!
+  accessControl: [AccessControl!]!
+  ownedProjects: [Project!]
+  approvalRequests: [ApprovalRequest]
+  planMeasures: [PlanMeasure]
+  notifications: [Notification]
+  activatedAt: Date!
+  expiredAt: Date!
+  version: Float!
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+type Department {
+  id: Int!
+  code: String
+  name: String!
+  isCommon: Boolean
+  annualPlans: [AnnualPlan]
+  userDepartments: UserDepartment
+  children: [Department]
+  parent: Department
+  enabledAt: String
+  disabledAt: String
+  plans: [Plan]
+  departmentLevel: DepartmentLevel
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type ProjectMilestone {
+  id: Int!
+  project: Project!
+  type: String
+  description: String
+  targetDate: String
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type ProjectAchievementCondition {
+  id: Int!
+  description: String!
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type ProjectSchedule {
+  id: Int!
+  project: Project!
+  type: String!
+  startDate: String!
+  endDate: String!
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type ProjectProgressReport {
+  id: Int!
+  targetDate: String
+  status: String
+  projectStatus: String
+  unit: String
+  delay: Float
+  avoidDelayPlan: String
+  impact: String
+  progress: Float
+  reportBody: String
+  quality: String
+  cost: String
+  member: String
+  reportedAt: Date
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type Project {
+  id: Int!
+  projectCode: String!
+  status: String
+  approvalRequests: [ApprovalRequest]
+  premiseCondition: String
+  impact: String
+  raisedUser: User
+  owner: UserDepartment
+  members: [UserDepartment!]
+  raisedDepartment: Department
+  milestones: [ProjectMilestone!]
+  tasks: [Task!]
+  progressReports: [ProjectProgressReport!]
+  schedules: [ProjectSchedule!]
+  priority: String
+  name: String
+  achievementConditions: [ProjectAchievementCondition!]
+  startDate: String
+  description: String
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type Client {
+  id: Int!
+  name: String!
+  slug: String!
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type Salary {
+  id: Int!
+  name: String!
+  salary: Int!
+  users: [User]
+  client: Client
+  version: Float!
+  createdAt: Date!
+  updatedAt: Date!
+  createdUserId: Float
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type User {
+  id: Int!
+  client: Client
+  raisedProjects: [Project!]
+  name: String!
+  isEmployeeBp: Boolean!
+  mailAddress: String!
+  lastLoggedInAt: Date!
+  salary: Salary
+  userDepartments: [UserDepartment!]
+  activatedAt: Date!
+  expiredAt: Date!
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type Profile {
+  id: Int!
+  client: Client
+  raisedProjects: [Project!]
+  name: String!
+  isEmployeeBp: Boolean!
+  mailAddress: String!
+  lastLoggedInAt: Date!
+  salary: Salary
+  userDepartments: [UserDepartment!]
+  activatedAt: Date!
+  expiredAt: Date!
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+  currentDepartmentId: Float!
+  currentUserDepartmentId: Float!
+  currentPositionWeight: Float!
+}
+
+type Auth {
+  accessToken: String!
+  userId: Float!
+  departmentId: Float!
+  userDepartmentId: Float!
+  positionWeight: Float!
+}
+
+type Company {
+  id: Int!
+  code: String!
+  name: String!
+  zipCode: String!
+  address: String!
+  person: String!
+  phone: String!
+  mailAddress: String!
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type SendMailResult {
+  messageId: String!
+}
+
+type UnreadCountOutput {
+  unreadCount: Int!
+}
+
+type PlanFormulationRequest {
+  id: Int!
+  code: String!
+  plan: Plan
+  requestedBy: UserDepartment
+  until: String
+  requestedTo: [UserDepartment]
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  updatedUserId: Float
+  deletedUserId: Float
+}
+
+type PriceUnit {
+  id: Int!
+  digitLength: Float!
+  version: Float!
+  createdAt: Date!
+  createdUserId: Float
+  updatedAt: Date!
+  deletedUserId: Float
+}
+
+type Query {
+  health: String!
+  findProfile: Profile!
+  findAllUsers: [User!]!
+  findMyUserDepartments: [UserDepartment!]!
+  findAllUserDepartments: [UserDepartment!]!
+  findAllUserDepartmentsWithChildren: [UserDepartment!]!
+  findAllDepartments: [Department!]!
+  createRFIWordFile(id: String!): String!
+  createRFPWordFile(id: String!): String!
+  createSampleExcelFile(id: String!): String!
+  findAllProjects: [Project!]!
+  findProjectById(id: Int!): Project!
+  findAllCompanies: [Company!]!
+  findAllTasks(projectId: Int!): [Task!]!
+  findTasksByProjectId(projectId: Int!): [Task!]!
+  findTaskById(id: Int!): Task!
+  findAllMeasures: [Measure!]!
+  findAllSystems: [System!]!
+  findAllItAssetTypes: [ItAssetType!]!
+  findAllCauseConditionsByCauseId(causeId: Int!): [CauseCondition!]!
+  findCauseConditionById(id: Int!): CauseCondition!
+  findIssueById(id: Int!): Issue!
+  findAllCausesByIssueId(issueId: Int!): [Cause!]!
+  findCauseById(id: Int!): Cause!
+  findSchedules: [Project!]!
+  findNotificationsToMe: [Notification!]!
+  findUnreadNotificationNumber: UnreadCountOutput!
+  findApprovalRequestsAssignedToMe: [ApprovalRequest!]!
+  findApprovalRequestsRequestedByMe(findApprovalRequestsRequestedByMeInput: FindApprovalRequestsRequestedByMeInput!): [ApprovalRequest!]!
+  findApprovalCategoryBySlug(slug: String!): ApprovalCategory
+  findApprovalFlow: ApprovalFlow!
+  findPlansByOrganizationLevel(findPlansByOrganizationLevelInput: FindPlansByOrganizationLevelInput!): [Plan]
+  findPlanByDepartmentIdAndBusinessYear(findPlanByDepartmentIdAndBusinessYearInput: FindPlanByDepartmentIdAndBusinessYearInput!): Plan
+  findAllAnnualPlans: [AnnualPlan!]
+  findAnnualPlanByYear(findAnnualPlanByYearInput: FindAnnualPlanByYearInput!): AnnualPlan
+  findAllPositions: [Position!]!
+  findBusinessYearsByRange(findBusinessYearsByRangeInput: FindBusinessYearsByRangeInput!): [BusinessYear!]
+  findAllBusinessYears: [BusinessYear!]!
+  findAllPlanMeasures: [PlanMeasure!]!
+  findPlanMeasuresByDepartmentId(findPlanMeasuresByDepartmentIdInput: FindPlanMeasuresByDepartmentIdInput!): [PlanMeasure!]!
+  findPlanMeasureById(code: String!): PlanMeasure!
+  findPlanMeasuresByDepartmentIds(findPlanMeasuresByDepartmentIdsInput: FindPlanMeasuresByDepartmentIdsInput!): [PlanMeasure!]!
+  findAllAccountTitles: [AccountTitle!]
+  findPriceUnit: PriceUnit
+}
+
+input FindApprovalRequestsRequestedByMeInput {
+  approvalCategorySlug: String
+}
+
+input FindPlansByOrganizationLevelInput {
+  level: Int!
+}
+
+input FindPlanByDepartmentIdAndBusinessYearInput {
+  departmentId: Int!
+  businessYear: Int!
+}
+
+input FindAnnualPlanByYearInput {
+  year: Int!
+  organizationLevel: Int!
+}
+
+input FindBusinessYearsByRangeInput {
+  startYear: Int!
+  endYear: Int!
+}
+
+input FindPlanMeasuresByDepartmentIdInput {
+  departmentId: Int!
+  startBusinessYear: Int
+  endBusinessYear: Int
+  startAggregationBusinessYear: Int
+  endAggregationBusinessYear: Int
+  createdByMe: Boolean
+  implementationTarget: String
+}
+
+input FindPlanMeasuresByDepartmentIdsInput {
+  departmentIds: [Int!]!
+  startBusinessYear: Int
+  endBusinessYear: Int
+  startAggregationBusinessYear: Int
+  endAggregationBusinessYear: Int
+  createdByMe: Boolean
+  implementationTarget: String
+}
+
+type Mutation {
+  login(loginInput: LoginInput!): Auth!
+  changeLoginDepartment(changeDepartmentInput: ChangeDepartmentInput!): Auth!
+  createProject(projectInput: ProjectInput!): Project!
+  updateProject(projectInput: ProjectInput!): Project!
+  deleteProject(deleteProjectInput: DeleteProjectInput!): Project!
+  createTask(taskInput: TaskInput!): Task!
+  updateTask(taskInput: TaskInput!): Task!
+  deleteTask(deleteTaskInput: TaskInput!): Task!
+  createMeasure(createMeasureInput: CreateMeasureInput!): Measure!
+  updateMeasure(updateMeasureInput: UpdateMeasureInput!): Measure!
+  setSystemsAndItAssetTypes(setSystemsAndItAssetTypesInput: [SetSystemsAndItAssetTypesInput!]!): [MeasureImplementationTask!]!
+  createCauseCondition(causeConditionInput: CauseConditionInput!): CauseCondition!
+  updateCauseCondition(causeConditionInput: CauseConditionInput!): CauseCondition!
+  deleteCauseCondition(causeConditionInput: CauseConditionInput!): CauseCondition!
+  createIssue(issueInput: IssueInput!): Issue!
+  updateIssue(issueInput: IssueInput!): Issue!
+  createCause(causeInput: CauseInput!): Cause!
+  updateCause(causeInput: CauseInput!): Cause!
+  deleteCause(causeInput: CauseInput!): Cause!
+  setMeasuresToCauses(causesInput: [CauseInput!]!): [Cause!]!
+  updateSchedules(scheduleInput: UpdateScheduleInput!): Boolean!
+  setMeasuresToTargets(targetsInput: [TargetInput!]!): [Target!]!
+  setMeasuresToTodos(todosInput: [TodoInput!]!): [Todo!]!
+  setMeasuresToOthers(othersInput: [OtherInput!]!): [Other!]!
+  setMeasuresToStudyContents(studyContentsInput: [StudyContentInput!]!): [StudyContent!]!
+  setMeasuresToInvestigations(investigationsInput: [InvestigationInput!]!): [Investigation!]!
+  seeNotification(seeNotificationInput: SeeNotificationInput!): Notification!
+  create(createApprovalRequestInput: CreateApprovalRequestInput!): ApprovalRequest!
+  cancelApprovalRequest(cancelApprovalRequestInput: CancelApprovalRequestInput!): ApprovalRequest!
+  updateApprovalRequest(updateApprovalRequestInput: UpdateApprovalRequestInput!): ApprovalRequest!
+  delete(deleteApprovalRequestInput: DeleteApprovalRequestInput!): ApprovalRequest!
+  sendMail(sendMailInput: SendMailInput!): SendMailResult!
+  rejectApprovalStepAssignee(rejectApprovalStepAssigneeInput: RejectApprovalStepAssigneeInput!): ApprovalStepAssignee!
+  approveApprovalStepAssignee(approveApprovalStepAssigneeInput: ApproveApprovalStepAssigneeInput!): ApprovalStepAssignee!
+  cancelApprovalStepAssignee(cancelApprovalStepAssigneeInput: CancelApprovalStepAssigneeInput!): ApprovalStepAssignee!
+  updateApprovalStepAssignee(updateApprovalStepAssigneeInput: UpdateApprovalStepAssigneeInput!): ApprovalStepAssignee!
+  confirmPlans(confirmPlansInput: ConfirmPlansInput!): [Plan]
+  updatePlans(updatePlansInput: UpdatePlansInput!): [Plan]
+  createPlans(createPlansInput: CreatePlansInput!): [Plan]
+  update(updateAnnualPlanInput: UpdateAnnualPlanInput!): AnnualPlan!
+  approveAnnualPlan(approveAnnualPlanInput: ApproveAnnualPlanInput!): AnnualPlan!
+  cancelApprovedAnnualPlan(cancelApprovedAnnualPlanInput: CancelApprovedAnnualPlanInput!): AnnualPlan!
+  createAnnualPlan(createAnnualPlanInput: CreateAnnualPlanInput!): AnnualPlan!
+  createPlanFormulationRequest(createPlanFormulationRequestInput: CreatePlanFormulationRequestInput!): PlanFormulationRequest!
+  createPlanMeasureRegistrationRequest(createPlanMeasureRegistrationRequestInput: CreatePlanMeasureRegistrationRequestInput!): PlanMeasureRegistrationRequest!
+  createPlanMeasure(createPlanMeasureInput: CreatePlanMeasureInput!): PlanMeasure!
+  updatePlanMeasure(updatePlanMeasureInput: UpdatePlanMeasureInput!): PlanMeasure!
+  deletePlanMeasurePrices(deletePlanMeasurePricesInput: DeletePlanMeasurePricesInput!): PlanMeasure!
+  deletePlanMeasure(deletePlanMeasureInput: DeletePlanMeasureInput!): PlanMeasure!
+  copyPlanMeasure(copyPlanMeasureInput: CopyPlanMeasureInput!): PlanMeasure!
+  copyPlanMeasures(copyPlanMeasuresInput: CopyPlanMeasuresInput!): [PlanMeasure!]!
+  completeRegistrationPlanMeasures(completeRegistrationPlanMeasuresInput: CompleteRegistrationPlanMeasuresInput!): Boolean!
+  decideTargetPlanMeasures(decideTargetPlanMeasuresInput: DecideTargetPlanMeasuresInput!): [PlanMeasure]
+  createApprovedAnnualPlanSnapshot(createApprovedAnnualPlanSnapshotInput: CreateApprovedAnnualPlanSnapshotInput!): ApprovedAnnualPlanSnapshot!
+}
+
+input LoginInput {
+  loginId: String!
+  password: String!
+}
+
+input ChangeDepartmentInput {
+  departmentId: Float!
+}
+
+input ProjectInput {
+  id: Float
+  name: String
+  status: String
+  description: String
+  impact: String
+  premiseCondition: String
+  raised_department_id: Float
+  raisedDepartment: DepartmentInput
+  raised_user_id: Float
+  raisedUser: UserInput
+  priority: String
+  startDate: String
+  achievementConditions: [ProjectAchievementConditionInput]
+  milestones: [ProjectMilestoneInput]
+  owner_id: Float
+  owner: UserDepartmentInput
+  members: [UserDepartmentInput]
+  schedules: [ProjectScheduleInput]
+  progressReports: [ProjectProgressReportInput]
+  version: Float
+}
+
+input DepartmentInput {
+  id: Float
+  name: String
+}
+
+input UserInput {
+  userId: Float
+  name: String
+}
+
+input ProjectAchievementConditionInput {
+  id: Float
+  description: String
+}
+
+input ProjectMilestoneInput {
+  id: Float
+  type: String
+  targetDate: String
+  description: String
+}
+
+input UserDepartmentInput {
+  id: Float!
+  userId: Float
+  departmentId: Float
+}
+
+input ProjectScheduleInput {
+  type: String!
+  startDate: String!
+  endDate: String!
+}
+
+input ProjectProgressReportInput {
+  id: Float
+  targetDate: String
+  status: String
+  projectStatus: String
+  unit: String
+  delay: Float
+  avoidDelayPlan: String
+  impact: String
+  progress: Float
+  reportBody: String
+  quality: String
+  cost: String
+  member: String
+  reportedAt: String
+  version: Float
+}
+
+input DeleteProjectInput {
+  id: Float!
+  version: Float!
+}
+
+input TaskInput {
+  id: Float
+  name: String
+  taskStatus: String
+  targets: [TargetInput]
+  investigations: [InvestigationInput]
+  studyContents: [StudyContentInput]
+  todos: [TodoInput]
+  others: [OtherInput]
+  issue: IssueInput
+  startDate: String
+  endDate: String
+  taskType: Float
+  project_id: Float
+  version: Float
+}
+
+input TargetInput {
+  id: Float
+  taskId: Float
+  text: String
+  createdAt: Date
+  updatedAt: Date
+  measures: [UpdateMeasureInput]
+}
+
+input UpdateMeasureInput {
+  id: Float!
+  name: String
+  overview: String
+  measureImplementationTaskInputs: [UpdateMeasureImplementationTaskInput]
+  measureImplementationEffectInputs: [UpdateMeasureImplementationEffectInput]
+  causeConditionInputs: [Int]
+  links: [GanttLinkInput!]
+  version: Float
+  costUnit: String
+}
+
+input UpdateMeasureImplementationTaskInput {
+  id: Float
+  ganttId: String
+  type: String
+  name: String
+  overview: String
+  newSystemName: String
+  systemOverview: String
+  targetSystem: [Int!]
+  affectedSystems: [Int]
+  modificationDescription: String
+  purchaseTargets: [Int]
+  abandonmentTargets: [Int]
+  implementationDetail: String
+  investigationDescription: String
+  procurementDescription: String
+  procurementScope: String
+  implementTarget: String
+  participants: [ParticipantInput!]
+  scopes: [ScopeInput!]
+  participantScopeRoles: [[Int!]!]
+  startAt: String
+  endAt: String
+}
+
+input ParticipantInput {
+  name: String
+  role: String
+  location: String
+}
+
+input ScopeInput {
+  name: String
+}
+
+input UpdateMeasureImplementationEffectInput {
+  id: Float
+  evaluation: String
+  valueBeforeImprovement: String
+  valueAfterImprovement: String
+  calculationBasis: String
+  startAt: String
+  startAtMemo: String
+  measuringMethod: String
+  annualCostEffect: Float
+}
+
+input GanttLinkInput {
+  id: Float
+  source: String
+  target: String
+  type: String
+}
+
+input InvestigationInput {
+  id: Float
+  taskId: Float
+  text: String
+  createdAt: Date
+  updatedAt: Date
+  measures: [UpdateMeasureInput]
+}
+
+input StudyContentInput {
+  id: Float
+  taskId: Float
+  text: String
+  createdAt: Date
+  updatedAt: Date
+  measures: [UpdateMeasureInput]
+}
+
+input TodoInput {
+  id: Float
+  taskId: Float
+  text: String
+  createdAt: Date
+  updatedAt: Date
+  measures: [UpdateMeasureInput]
+}
+
+input OtherInput {
+  id: Float
+  taskId: Float
+  text: String
+  createdAt: Date
+  updatedAt: Date
+  measures: [UpdateMeasureInput]
+}
+
+input IssueInput {
+  id: Float
+  taskId: Float
+  occurStatus: String
+  occurCount: Float
+  occurFrequency: String
+  occurFrequencyDetail: String
+  contents: String
+  impact: String
+  updatedUserId: Float
+  causes: [CauseInput]
+}
+
+input CauseInput {
+  id: Float
+  text: String
+  isHypothesis: Boolean
+  causeConditions: [CauseConditionInput]
+  measures: [UpdateMeasureInput]
+}
+
+input CauseConditionInput {
+  id: Float
+  achievementCondition: String
+}
+
+input CreateMeasureInput {
+  id: Float
+  name: String!
+  overview: String
+  measureImplementationTaskInputs: [CreateMeasureImplementationTaskInput]
+  measureImplementationEffectInputs: [CreateMeasureImplementationEffectInput]
+  causeConditionInputs: [Int]
+  links: [GanttLinkInput!]
+  costUnit: String
+}
+
+input CreateMeasureImplementationTaskInput {
+  id: Float
+  ganttId: String
+  type: String
+  name: String
+  overview: String
+  newSystemName: String
+  systemOverview: String
+  targetSystem: Int
+  affectedSystems: [Int]
+  modificationDescription: String
+  purchaseTargets: [Int]
+  abandonmentTargets: [Int]
+  implementationDetail: String
+  investigationDescription: String
+  procurementDescription: String
+  procurementScope: String
+  implementTarget: String
+  participants: [ParticipantInput!]
+  scopes: [ScopeInput!]
+  participantScopeRoles: [[Int!]!]
+  startAt: String
+  endAt: String
+}
+
+input CreateMeasureImplementationEffectInput {
+  evaluation: String
+  valueBeforeImprovement: String
+  valueAfterImprovement: String
+  calculationBasis: String
+  startAt: String
+  startAtMemo: String
+  measuringMethod: String
+  annualCostEffect: Float
+}
+
+input SetSystemsAndItAssetTypesInput {
+  id: Float!
+  affectedSystems: [Int!]
+  abandonmentTargets: [Int!]
+  purchaseTargets: [Int!]
+}
+
+input UpdateScheduleInput {
+  projects: [UpdateScheduleProject!]!
+  projectMilestones: [UpdateScheduleProjectMilestone!]!
+  tasks: [UpdateScheduleTask!]!
+  measures: [UpdateScheduleMeasure!]!
+  measureImplementationTasks: [UpdateScheduleMeasureImplementationTask!]!
+}
+
+input UpdateScheduleProject {
+  projectId: Float!
+  startDate: String!
+  endDate: String!
+}
+
+input UpdateScheduleProjectMilestone {
+  projectMilestoneId: Float!
+  targetDate: String!
+}
+
+input UpdateScheduleTask {
+  taskId: Float!
+  startDate: String!
+  endDate: String!
+}
+
+input UpdateScheduleMeasure {
+  measureId: Float!
+  startDate: String!
+  endDate: String!
+}
+
+input UpdateScheduleMeasureImplementationTask {
+  measureImplementationTaskId: Float!
+  startDate: String!
+  endDate: String!
+}
+
+input SeeNotificationInput {
+  id: Float!
+}
+
+input CreateApprovalRequestInput {
+  approvalCategory: UpdateApprovalCategoryInput!
+  message: String
+  until: String
+  approvalFlow: CreateApprovalFlowInput
+}
+
+input UpdateApprovalCategoryInput {
+  id: Float!
+  slug: String
+  name: String
+}
+
+input CreateApprovalFlowInput {
+  name: String
+  description: String
+  approvalSteps: [CreateApprovalStepInput!]
+}
+
+input CreateApprovalStepInput {
+  name: String
+  order: Int!
+  type: String!
+  isEditableFlow: Boolean!
+  isSkippableFlow: Boolean!
+  approverType: String!
+  isRequesterIncluded: Boolean!
+  approvalStepAssignees: [ApprovalStepAssigneeInput!]!
+  department: DepartmentInput
+}
+
+input ApprovalStepAssigneeInput {
+  comment: String
+  userDepartment: UserDepartmentInput
+  approvalStatus: String!
+}
+
+input CancelApprovalRequestInput {
+  id: Int!
+}
+
+input UpdateApprovalRequestInput {
+  id: Int!
+  approvalCategory: UpdateApprovalCategoryInput
+  message: String
+  until: String
+  status: String
+}
+
+input DeleteApprovalRequestInput {
+  id: Int!
+  version: Int!
+}
+
+input SendMailInput {
+  loginId: String!
+}
+
+input RejectApprovalStepAssigneeInput {
+  id: Int!
+  approvalRequestId: Int!
+  comment: String
+}
+
+input ApproveApprovalStepAssigneeInput {
+  id: Int!
+  approvalRequestId: Int!
+  comment: String
+}
+
+input CancelApprovalStepAssigneeInput {
+  id: Int!
+  approvalRequestId: Int!
+  comment: String
+}
+
+input UpdateApprovalStepAssigneeInput {
+  id: Int!
+  comment: String
+  approvalStatus: String!
+}
+
+input ConfirmPlansInput {
+  plans: [ConfirmPlanInput!]!
+}
+
+input ConfirmPlanInput {
+  id: Int!
+}
+
+input UpdatePlansInput {
+  plans: [UpdatePlanInput!]!
+}
+
+input UpdatePlanInput {
+  id: Int!
+  status: String
+  targetSales: Float
+  deemedSales: Float
+  targetSalesCost: Float
+  targetSellingExpense: Float
+  targetGeneralAdministrativeExpense: Float
+  version: Float
+}
+
+input CreatePlansInput {
+  plans: [CreatePlanInput!]!
+}
+
+input CreatePlanInput {
+  departmentId: Int!
+  status: String
+  targetSales: Float
+  deemedSales: Float
+  targetSalesCost: Float
+  targetSellingExpense: Float
+  targetGeneralAdministrativeExpense: Float
+  annualPlanId: Int!
+}
+
+input UpdateAnnualPlanInput {
+  id: Int!
+  status: String
+}
+
+input ApproveAnnualPlanInput {
+  id: Int!
+  version: Float
+}
+
+input CancelApprovedAnnualPlanInput {
+  id: Int!
+  version: Float
+}
+
+input CreateAnnualPlanInput {
+  businessYearId: Int!
+}
+
+input CreatePlanFormulationRequestInput {
+  planId: Float
+  until: String
+  requestedTo: [Int]
+}
+
+input CreatePlanMeasureRegistrationRequestInput {
+  planId: Float
+  until: String
+  requestedTo: [Int]
+}
+
+input CreatePlanMeasureInput {
+  measureName: String!
+  overview: String
+  classification: String
+  implementationTarget: String
+  businessYear: JSONObject!
+  department: JSONObject!
+  registeredBy: JSONObject!
+  risks: [PlanMeasureRiskInput!]
+  sales: [PlanMeasureEffectSaleInput!]
+  costs: [PlanMeasureCostInput!]
+  tasks: [PlanMeasureTaskInput!]
+}
+
+"""
+The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSONObject @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+
+input PlanMeasureRiskInput {
+  id: Float
+  department: JSONObject!
+  businessYear: JSONObject!
+  riskName: String!
+  targetType: String
+  accountTitle: JSONObject
+  prices: [PlanMeasureRiskPriceInput]
+  assigns: [PlanMeasureRiskAssignInput]
+  version: Float
+}
+
+input PlanMeasureRiskPriceInput {
+  id: Float
+  department: JSONObject!
+  businessYear: JSONObject!
+  yearOfOccurrence: Int!
+  monthOfOccurrence: Int!
+  cost: Float!
+  version: Float
+}
+
+input PlanMeasureRiskAssignInput {
+  id: Float
+  department: JSONObject!
+  businessYear: JSONObject!
+  costTD: PlanMeasureRiskCostTargetDepartmentInput
+  costTI: PlanMeasureRiskCostTargetIndividualInput
+  version: Float
+}
+
+input PlanMeasureRiskCostTargetDepartmentInput {
+  id: Float
+  department: JSONObject!
+  businessYear: JSONObject!
+  version: Float
+}
+
+input PlanMeasureRiskCostTargetIndividualInput {
+  id: Float
+  userDpm: UserDepartmentInput
+  department: JSONObject!
+  businessYear: JSONObject!
+}
+
+input PlanMeasureEffectSaleInput {
+  id: Float
+  department: JSONObject!
+  businessYear: JSONObject!
+  project: String
+  effectIncDec: String
+  prices: [PlanMeasureSalePriceInput]
+  version: Float
+}
+
+input PlanMeasureSalePriceInput {
+  id: Float
+  department: JSONObject!
+  businessYear: JSONObject!
+  yearOfOccurrence: Float!
+  monthOfOccurrence: Float!
+  cost: Float!
+  version: Float
+}
+
+input PlanMeasureCostInput {
+  id: Float
+  department: JSONObject!
+  businessYear: JSONObject!
+  item: String
+  accountTitle: JSONObject
+  effectIncDec: String
+  prices: [PlanMeasureCostPriceInput]
+  assigns: [PlanMeasureCostAssignInput]
+  version: Float
+}
+
+input PlanMeasureCostPriceInput {
+  id: Float
+  department: JSONObject!
+  businessYear: JSONObject!
+  yearOfOccurrence: Float!
+  monthOfOccurrence: Float!
+  cost: Float!
+  version: Float
+}
+
+input PlanMeasureCostAssignInput {
+  id: Float
+  department: JSONObject!
+  businessYear: JSONObject!
+  costTD: PlanMeasureCostTargetDepartmentInput
+  costTI: PlanMeasureCostTargetIndividualInput
+  version: Float
+}
+
+input PlanMeasureCostTargetDepartmentInput {
+  id: Float
+  department: JSONObject!
+  businessYear: JSONObject!
+  version: Float
+}
+
+input PlanMeasureCostTargetIndividualInput {
+  id: Float
+  userDpm: UserDepartmentInput
+  department: JSONObject!
+  businessYear: JSONObject!
+}
+
+input PlanMeasureTaskInput {
+  id: Float
+  businessYear: JSONObject!
+  department: JSONObject!
+  taskName: String!
+  accountTitle: JSONObject
+  costRecordingDestination: String!
+  kpiType: String
+  kpiOther: String
+  kpiThreshold: String
+  kpiPeriod: String
+  prices: [PlanMeasureTaskPriceInput]
+  assigns: [PlanMeasureTaskAssignInput]
+  allocations: [PlanMeasureTaskAllocationInput]
+  version: Float
+}
+
+input PlanMeasureTaskPriceInput {
+  id: Float
+  department: JSONObject!
+  businessYear: JSONObject!
+  yearOfOccurrence: Float!
+  monthOfOccurrence: Float!
+  cost: Float!
+  version: Float
+}
+
+input PlanMeasureTaskAssignInput {
+  id: Float
+  department: JSONObject!
+  businessYear: JSONObject!
+  costTD: PlanMeasureTaskCostTargetDepartmentInput
+  costTI: PlanMeasureTaskCostTargetIndividualInput
+  version: Float
+}
+
+input PlanMeasureTaskCostTargetDepartmentInput {
+  id: Float
+  department: JSONObject!
+  businessYear: JSONObject!
+  version: Float
+}
+
+input PlanMeasureTaskCostTargetIndividualInput {
+  id: Float
+  userDpm: UserDepartmentInput
+  department: JSONObject!
+  businessYear: JSONObject!
+}
+
+input PlanMeasureTaskAllocationInput {
+  id: Float
+  department: JSONObject!
+  businessYear: JSONObject!
+  distriDpm: JSONObject!
+  allocationRate: Float!
+  version: Float
+}
+
+input UpdatePlanMeasureInput {
+  id: Float!
+  code: String!
+  measureName: String!
+  overview: String
+  classification: String
+  risks: [PlanMeasureRiskInput]
+  sales: [PlanMeasureEffectSaleInput]
+  costs: [PlanMeasureCostInput]
+  tasks: [PlanMeasureTaskInput]
+  version: Float
+}
+
+input DeletePlanMeasurePricesInput {
+  planMeasureId: Int!
+  startBusinessYear: Int!
+  endBusinessYear: Int!
+  aggregationType: [String!]
+}
+
+input DeletePlanMeasureInput {
+  id: Int!
+  version: Float
+}
+
+input CopyPlanMeasureInput {
+  planMeasureId: Int
+  planMeasure: JSONObject
+  startBusinessYear: Int!
+  endBusinessYear: Int!
+  copyToNextYear: Boolean!
+  aggregationType: [String!]
+}
+
+input CopyPlanMeasuresInput {
+  planMeasureIds: [Int!]!
+  startBusinessYear: Int!
+  endBusinessYear: Int!
+  copyToNextYear: Boolean!
+}
+
+input CompleteRegistrationPlanMeasuresInput {
+  planMeasureRegistrationRequestId: Int!
+  comment: String
+}
+
+input DecideTargetPlanMeasuresInput {
+  targetPlanMeasures: [DecideTargetPlanMeasureInput!]!
+}
+
+input DecideTargetPlanMeasureInput {
+  id: Int!
+  implementationTarget: String!
+  version: Float
+}
+
+input CreateApprovedAnnualPlanSnapshotInput {
+  approvedAnnualPlanId: Int!
+}

@@ -1,0 +1,9 @@
+{
+  "name": "YYY backend",
+  "description": "A  Node.js app using Nestjs",
+  "logo": "https://node-js-sample.herokuapp.com/node.png",
+  "keywords": ["node", "express", "nestjs"],
+  "scripts": {
+    "postdeploy": "yarn ts-node node_modules/.bin/typeorm -f src/ormconfig.ts migration:run"
+  },
+}

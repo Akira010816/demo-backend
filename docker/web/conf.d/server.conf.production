@@ -1,0 +1,8 @@
+
+upstream backend {
+    server localhost:3300;
+}
+
+upstream frontend {
+    server localhost:3000;
+}

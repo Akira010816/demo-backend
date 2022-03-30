@@ -1,0 +1,8 @@
+
+upstream backend {
+    server backend:3300;
+}
+
+upstream frontend {
+    server frontend:3000;
+}

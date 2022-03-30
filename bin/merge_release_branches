@@ -1,0 +1,11 @@
+#!/bin/sh
+git fetch
+git checkout release/develop
+git pull origin release/develop
+git pull origin develop
+git checkout release/production
+git pull origin release/production
+git pull origin develop
+git checkout develop
+git push origin release/develop
+git push origin release/production
